@@ -38,3 +38,7 @@
 - name: jenkins_worker | Add script to set up environment variables
   template: src=jenkins_env.sh.j2 dest=/usr/local/bin/jenkins_env.sh
             owner=root group=root mode=0555
+
+- name: jenkins_worker | Configure git
+  template: src=gitconfig.j2 dest=/etc/gitconfig
+            owner=root group=root mode=0744
