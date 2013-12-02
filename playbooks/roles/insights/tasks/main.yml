@@ -56,7 +56,7 @@
 
 - name: insights | install projects
   shell: >
-     . {{insights_venv_dir}}/bin/activate && cd {{item.code_dir}} && python setup.py install && deactivate
+     {{insights_venv_dir}}/bin/python {{item.code_dir}}/setup.py install
   sudo_user: "{{ edxapp_user }}"
   with_items: insights_repos.values()
   tags:
@@ -64,7 +64,7 @@
 
 - name: insights | database setup
   shell: >
-     . {{insights_venv_dir}}/bin/activate && cd {{insights_repos.insights.code_dir}}/src && python manage.py syncdb --migrate --noinput && deactivate
+     {{insights_venv_dir}}/bin/python {{insights_repos.insights.code_dir}}/src/manage.py syncdb --migrate --noinput
   sudo_user: "{{ edxapp_user }}"
   tags:
     - deploy
